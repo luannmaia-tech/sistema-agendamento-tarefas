@@ -1,3 +1,5 @@
+import { salvarTarefa, editarTarefa } from './storage.js';
+
 var instanciaModal = new bootstrap.Modal(document.getElementById('modalTarefa'));
 
 var campoTitulo =document.getElementById("campoTitulo")
@@ -54,18 +56,10 @@ document.getElementById('btnSalvarTarefa').addEventListener('click', function() 
     };
 
     if (idTarefaEditando === null) {
-        tarefa.id = Date.now();
-        tarefasTemporarias.push(tarefa);
+        salvarTarefa(tarefa);
     } else {
-        for (var i = 0; i < tarefasTemporarias.length; i++) {
-            if (tarefasTemporarias[i].id === idTarefaEditando) {
-                tarefa.id = idTarefaEditando;
-                tarefasTemporarias[i] = tarefa;
-            }
-        }
-    }
-
-    console.log(tarefasTemporarias);
+        editarTarefa(idTarefaEditando, tarefa);
+    };
    instanciaModal.hide();
 });
 
