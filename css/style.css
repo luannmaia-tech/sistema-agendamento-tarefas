@@ -8,7 +8,14 @@
 body {
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
+    min-height: 100vh;
+    display:flex;
+    flex-direction:column;
 }   
+
+main{
+    flex: 1;
+}
 
 .card {
     border-color: var(--cor-borda);

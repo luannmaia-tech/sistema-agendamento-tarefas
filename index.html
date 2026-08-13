@@ -37,7 +37,7 @@
 				</div>
 			</div>
 
-			<div <div class="col-12 col-md-4">
+			<div class="col-12 col-md-4">
 				<div class="card">
 					<div class="card-header">
 						<span id="dataSelecionada">Tarefas do dia</span>
@@ -59,12 +59,58 @@
 		</div>
 	</footer>
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="js/storage.js"></script>
-	<script src="js/calendario.js"></script>
-	<script src="js/tarefas.js"></script>
-	<script src="js/modal.js"></script>
+	<div class="modal fade" id="modalTarefa" tabindex="-1">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
 
+				<div class="modal-header">
+					<h5 class="modal-title" id="tituloModal">Nova Tarefa</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+
+				<div class="modal-body">
+					<div class="mb-3">
+						<label for="campoTitulo" class="form-label">Título</label>
+						<input type="text" class="form-control" id="campoTitulo">
+					</div>
+
+					<div class="mb-3">
+						<label for="campoDescricao" class="form-label">Descrição</label>
+						<textarea class="form-control" id="campoDescricao" rows="2"></textarea>
+					</div>
+
+					<div class="mb-3">
+						<label for="campoData" class="form-label">Data</label>
+						<input type="date" class="form-control" id="campoData">
+					</div>
+
+					<div class="row">
+						<div class="col-6 mb-3">
+							<label for="campoHoraInicio" class="form-label">Início</label>
+							<input type="time" class="form-control" id="campoHoraInicio">
+						</div>
+
+						<div class="col-6 mb-3">
+							<label for="campoHoraFim" class="form-label">Término</label>
+							<input type="time" class="form-control" id="campoHoraFim">
+						</div>
+					</div>
+
+					<div class="alert alert-danger d-none" id="erroModal"></div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary" id="btnSalvarTarefa">Salvar</button>
+				</div>
+
+			</div>
+
+		</div>
+
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="module" src="js/modal.js"></script>
 
 </body>
 
