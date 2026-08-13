@@ -5,7 +5,7 @@ const path = require('path');
 const tipos = {
 '.html': 'text/html',
 '.js': 'text/javascript',
-'.css': 'texte/css',
+'.css': 'text/css',
 };
 
 http.createServer((req, res) => {
