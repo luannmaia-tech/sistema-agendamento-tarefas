@@ -15,15 +15,15 @@ function tarefaOcorreNaData(tarefa, date) {
   return date >= inicio && date <= fim;
 }
 
-function listarTarefas() {
+export function listarTarefas() {
   return obterTarefas();
 }
 
-function listarTarefasPorData(date) {
+export function listarTarefasPorData(date) {
   return obterTarefas().filter((tarefa) => tarefaOcorreNaData(tarefa, date));
 }
 
-function salvarTarefa(tarefa) {
+export function salvarTarefa(tarefa) {
   const tarefas = obterTarefas();
   const novaTarefa = { id: Date.now(), ...tarefa };
   tarefas.push(novaTarefa);
@@ -31,7 +31,7 @@ function salvarTarefa(tarefa) {
   return novaTarefa;
 }
 
-function editarTarefa(id, dados) {
+export function editarTarefa(id, dados) {
   const tarefas = obterTarefas();
   const indice = tarefas.findIndex((tarefa) => tarefa.id === id);
 
@@ -44,7 +44,7 @@ function editarTarefa(id, dados) {
   return tarefas[indice];
 }
 
-function excluirTarefa(id) {
+export function excluirTarefa(id) {
   const tarefas = obterTarefas();
   const indice = tarefas.findIndex((tarefa) => tarefa.id === id);
 
@@ -57,6 +57,6 @@ function excluirTarefa(id) {
   return true;
 }
 
-function contarTarefasPorData(date) {
+export function contarTarefasPorData(date) {
   return listarTarefasPorData(date).length;
 }
