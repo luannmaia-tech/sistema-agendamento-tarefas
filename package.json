@@ -1,0 +1,12 @@
+{
+  "name": "sistema-agendamento-tarefas",
+  "version": "1.0.0",
+  "description": "Aplicação web para agendamento de tarefas - Trabalho Final Git UTFPR",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

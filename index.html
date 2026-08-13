@@ -10,14 +10,14 @@
 
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 	<header class="bg-dark text-white py-3">
 		<div class="container">
 			<h1 class="h4 mb-0">Sistema de Agendamento de Tarefas</h1>
 		</div>
 	</header>
 
-	<main class="container my-4">
+	<main class="container my-4 flex-grow-1">
 		<div class="row g-3">
 
 			<div class="col-12 col-md-8">
@@ -32,12 +32,11 @@
 					</div>
 					<div class="card-body">
 						<div id="calendario">Calendário será renderizado aqui</div>
-
 					</div>
 				</div>
 			</div>
 
-			<div <div class="col-12 col-md-4">
+			<div class="col-12 col-md-4">
 				<div class="card">
 					<div class="card-header">
 						<span id="dataSelecionada">Tarefas do dia</span>
@@ -49,11 +48,10 @@
 				</div>
 			</div>
 
-
 		</div>
 	</main>
 
-	<footer class="bg-dark text-white py-3 mt-4">
+	<footer class="bg-dark text-white py-3 mt-auto">
 		<div class="container">
 			<small>Luann Silva Maia e Matheus Henrique Coitinho Loss</small>
 		</div>
@@ -64,7 +62,6 @@
 	<script src="js/calendario.js"></script>
 	<script src="js/tarefas.js"></script>
 	<script src="js/modal.js"></script>
-
 
 </body>
 
