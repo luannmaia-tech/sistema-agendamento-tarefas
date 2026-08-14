@@ -1,20 +1,57 @@
-import {listarTarefasPorData} from './storage.js'; // Importa do storage p/ exibir as tarefas nas células do calendário
+import { listarTarefasPorData } from './storage.js'; // Importa do storage p/ exibir as tarefas nas células do calendário
 
 const DIAS_SEMANA = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 const MESES = [
   'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
   'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro',
 ];
+const LIMITE_TAREFAS_CELULA = 2;
 
 let mesAtual = new Date().getMonth();
 let anoAtual = new Date().getFullYear();
 let dataSelecionada = formatarDataISO(new Date());
 
-function formatarDataISO(data) {
+const ouvintesSelecao = [];
+
+export function formatarDataISO(data) {
   const ano = data.getFullYear();
   const mes = String(data.getMonth() + 1).padStart(2, '0');
   const dia = String(data.getDate()).padStart(2, '0');
   return `${ano}-${mes}-${dia}`;
+}
+
+export function obterDataSelecionada() {
+  return dataSelecionada;
+}
+
+export function aoSelecionarDia(callback) {
+  ouvintesSelecao.push(callback);
+}
+
+function escaparHtml(texto) {
+  const elemento = document.createElement('div');
+  elemento.textContent = texto ?? '';
+  return elemento.innerHTML;
+}
+
+function montarPreviewTarefas(dataISO) {
+  const tarefas = listarTarefasPorData(dataISO)
+    .sort((atual, proxima) => atual.startDate.localeCompare(proxima.startDate));
+
+  if (tarefas.length === 0) {
+    return '';
+  }
+
+  const visiveis = tarefas.slice(0, LIMITE_TAREFAS_CELULA);
+  const restante = tarefas.length - visiveis.length;
+  const itens = visiveis
+    .map((tarefa) => `<span class="calendario-tarefa">${escaparHtml(tarefa.title)}</span>`)
+    .join('');
+  const mais = restante > 0
+    ? `<span class="calendario-tarefa-mais">+${restante}</span>`
+    : '';
+
+  return `<span class="calendario-tarefas">${itens}${mais}</span>`;
 }
 
 function gerarCelulasDoMes(ano, mes) {
@@ -41,7 +78,7 @@ function gerarCelulasDoMes(ano, mes) {
   return celulas;
 }
 
-function selecionarDia(dataISO) {
+export function selecionarDia(dataISO) {
   dataSelecionada = dataISO;
 
   const data = new Date(`${dataISO}T00:00:00`);
@@ -49,31 +86,11 @@ function selecionarDia(dataISO) {
   anoAtual = data.getFullYear();
 
   renderizarCalendario();
+  ouvintesSelecao.forEach((callback) => callback(dataISO));
 }
 
-function montarTarjinhas(dataISO) {
-  const tarefas = listarTarefasPorData(dataISO);
 
-  if (tarefas.length === 0) {
-    return '';
-  }
-
-  const visiveis = tarefas.slice(0, 2);
-  const restantes = tarefas.length - visiveis.length;
-
-  const tarjinhas = visiveis
-    .map((tarefa) => `<span class="calendario-tarefa">${tarefa.title}</span>`)
-    .join('');
-
-  const maisTarefas = restantes > 0
-    ?`<span class="calendario-mais">+${restantes} mais</span>`
-    : '';
-    
-    return `<span class="calendario-tarefas">${tarjinhas}${maisTarefas}</span>`;
-
-}
-
-function renderizarCalendario() {
+export function renderizarCalendario() {
   const container = document.getElementById('calendario');
   const tituloMesAno = document.getElementById('mesAno');
   const celulas = gerarCelulasDoMes(anoAtual, mesAtual);
@@ -102,7 +119,8 @@ function renderizarCalendario() {
           aria-label="Dia ${data.getDate()}"
           aria-pressed="${selecionado}"
         >
-          <span class="calendario-numero">${data.getDate()}</span>${montarTarjinhas(dataISO)}
+<<span class="calendario-numero">${data.getDate()}</span>
+          ${montarPreviewTarefas(dataISO)}
         </button>
       `;
     })

@@ -41,7 +41,7 @@ main{
 
 .calendario-dia {
     width: 100%;
-    min-height: 4rem;
+    min-height: 5.5rem;
     border: 1px solid var(--cor-borda);
     border-radius: 0.375rem;
     background-color: #fff;
@@ -75,34 +75,130 @@ main{
 .calendario-tarefas {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    margin-top: 4px;
-    width: 100%;
+gap: 0.15rem;
+    margin-top: 0.3rem;
 }
 
 .calendario-tarefa {
-    background-color: var(--cor-primaria);
-    color: #fff;
+    display: block;
     font-size: 0.7rem;
-    padding: 1px 4px;
-    border-radius: 3px;
+    line-height: 1.2;
+    font-weight: 500;
+    color: var(--cor-primaria);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.calendario-mais {
-    font-size: 0.65rem;
+flito css resolvido · CSS
+.calendario-tarefa-mais {
+    font-size: 0.7rem;
     color: #6c757d;
-    padding-left: 2px;
 }
-
+ 
+#painelTarefas {
+    --bs-offcanvas-width: min(400px, 92vw);
+    min-width: min(280px, 70vw);
+    max-width: 92vw;
+}
+ 
+#painelTarefas .offcanvas-header {
+    gap: 0.75rem;
+}
+ 
+.painel-cabecalho-texto {
+    min-width: 0;
+    flex: 1 1 auto;
+}
+ 
+.painel-cabecalho-texto .offcanvas-title,
+#dataSelecionada {
+    overflow-wrap: anywhere;
+}
+ 
+#painelTarefas .offcanvas-body {
+    overflow-x: hidden;
+}
+ 
+.painel-redimensionar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px;
+    height: 100%;
+    cursor: ew-resize;
+    z-index: 2;
+    touch-action: none;
+}
+ 
+.painel-redimensionar::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 3px;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 2.5rem;
+    border-radius: 999px;
+    background-color: #adb5bd;
+}
+ 
+.painel-redimensionar:hover::after,
+.painel-redimensionar:focus-visible::after,
+body.painel-redimensionando .painel-redimensionar::after {
+    background-color: var(--cor-primaria);
+}
+ 
+.painel-redimensionar:focus-visible {
+    outline: none;
+}
+ 
+body.painel-redimensionando {
+    cursor: ew-resize;
+    user-select: none;
+}
+ 
+.tarefa-item {
+    border-left: 3px solid var(--cor-primaria);
+}
+ 
+.tarefa-item-linha {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.5rem;
+    min-width: 0;
+    flex-wrap: wrap;
+}
+ 
+.tarefa-item-texto {
+    flex: 1 1 12rem;
+    min-width: 0;
+}
+ 
+.tarefa-titulo,
+.tarefa-descricao {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+ 
+.tarefa-descricao {
+    white-space: pre-wrap;
+}
+ 
+@media (max-width: 575.98px) {
+    #painelTarefas {
+        --bs-offcanvas-width: 85vw;
+    }
+}
+ 
+/* Oculta as tarjinhas no mobile, exibindo apenas um indicador (issue 4) */
 @media (max-width: 767px) {
     .calendario-tarefa,
-    .calendario-mais {
+    .calendario-tarefa-mais {
         display: none;
     }
-
+ 
     .calendario-tarefas::after {
         content: '';
         display: block;
