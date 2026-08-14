@@ -119,7 +119,7 @@ export function renderizarCalendario() {
           aria-label="Dia ${data.getDate()}"
           aria-pressed="${selecionado}"
         >
-<<span class="calendario-numero">${data.getDate()}</span>
+          <span class="calendario-numero">${data.getDate()}</span>
           ${montarPreviewTarefas(dataISO)}
         </button>
       `;
