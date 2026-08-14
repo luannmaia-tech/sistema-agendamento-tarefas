@@ -9,9 +9,13 @@ function persistirTarefas(tarefas) {
   localStorage.setItem(CHAVE_TAREFAS, JSON.stringify(tarefas));
 }
 
+function extrairData(valor) {
+  return (valor || '').slice(0, 10);
+}
+
 function tarefaOcorreNaData(tarefa, date) {
-  const inicio = tarefa.startDate;
-  const fim = tarefa.endDate || inicio;
+  const inicio = extrairData(tarefa.startDate);
+  const fim = extrairData(tarefa.endDate) || inicio;
   return date >= inicio && date <= fim;
 }
 
