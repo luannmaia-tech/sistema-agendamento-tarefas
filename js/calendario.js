@@ -1,3 +1,5 @@
+import {listarTarefasPorData} from './storage.js'; // Importa do storage p/ exibir as tarefas nas células do calendário
+
 const DIAS_SEMANA = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 const MESES = [
   'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
@@ -49,6 +51,28 @@ function selecionarDia(dataISO) {
   renderizarCalendario();
 }
 
+function montarTarjinhas(dataISO) {
+  const tarefas = listarTarefasPorData(dataISO);
+
+  if (tarefas.length === 0) {
+    return '';
+  }
+
+  const visiveis = tarefas.slice(0, 2);
+  const restantes = tarefas.length - visiveis.length;
+
+  const tarjinhas = visiveis
+    .map((tarefa) => `<span class="calendario-tarefa">${tarefa.title}</span>`)
+    .join('');
+
+  const maisTarefas = restantes > 0
+    ?`<span class="calendario-mais">+${restantes} mais</span>`
+    : '';
+    
+    return `<span class="calendario-tarefas">${tarjinhas}${maisTarefas}</span>`;
+
+}
+
 function renderizarCalendario() {
   const container = document.getElementById('calendario');
   const tituloMesAno = document.getElementById('mesAno');
@@ -78,7 +102,7 @@ function renderizarCalendario() {
           aria-label="Dia ${data.getDate()}"
           aria-pressed="${selecionado}"
         >
-          <span class="calendario-numero">${data.getDate()}</span>
+          <span class="calendario-numero">${data.getDate()}</span>${montarTarjinhas(dataISO)}
         </button>
       `;
     })

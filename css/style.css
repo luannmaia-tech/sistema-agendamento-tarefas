@@ -71,3 +71,45 @@ main{
     font-weight: 600;
     font-size: 0.9rem;
 }
+
+.calendario-tarefas {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 4px;
+    width: 100%;
+}
+
+.calendario-tarefa {
+    background-color: var(--cor-primaria);
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 1px 4px;
+    border-radius: 3px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.calendario-mais {
+    font-size: 0.65rem;
+    color: #6c757d;
+    padding-left: 2px;
+}
+
+@media (max-width: 767px) {
+    .calendario-tarefa,
+    .calendario-mais {
+        display: none;
+    }
+
+    .calendario-tarefas::after {
+        content: '';
+        display: block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--cor-primaria);
+        margin: 0 auto;
+    }
+}

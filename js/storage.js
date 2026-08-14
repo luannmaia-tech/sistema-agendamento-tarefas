@@ -10,8 +10,8 @@ function persistirTarefas(tarefas) {
 }
 
 function tarefaOcorreNaData(tarefa, date) {
-  const inicio = tarefa.startDate;
-  const fim = tarefa.endDate || inicio;
+  const inicio = tarefa.startDate.slice(0, 10);
+  const fim = (tarefa.endDate || tarefa.startDate).slice(0 ,10);
   return date >= inicio && date <= fim;
 }
 
