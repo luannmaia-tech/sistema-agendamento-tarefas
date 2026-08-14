@@ -10,7 +10,7 @@ function persistirTarefas(tarefas) {
 }
 
 function extrairData(valor) {
-  return (valor || '').slice(0, 10);
+  return valor ? valor.slice(0, 10) : '';
 }
 
 function tarefaOcorreNaData(tarefa, date) {

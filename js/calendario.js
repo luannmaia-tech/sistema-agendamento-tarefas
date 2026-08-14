@@ -1,4 +1,4 @@
-import { listarTarefasPorData } from './storage.js';
+import { listarTarefasPorData } from './storage.js'; // Importa do storage p/ exibir as tarefas nas células do calendário
 
 const DIAS_SEMANA = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 const MESES = [
@@ -89,6 +89,7 @@ export function selecionarDia(dataISO) {
   ouvintesSelecao.forEach((callback) => callback(dataISO));
 }
 
+
 export function renderizarCalendario() {
   const container = document.getElementById('calendario');
   const tituloMesAno = document.getElementById('mesAno');
@@ -118,7 +119,7 @@ export function renderizarCalendario() {
           aria-label="Dia ${data.getDate()}"
           aria-pressed="${selecionado}"
         >
-          <span class="calendario-numero">${data.getDate()}</span>
+<<span class="calendario-numero">${data.getDate()}</span>
           ${montarPreviewTarefas(dataISO)}
         </button>
       `;
